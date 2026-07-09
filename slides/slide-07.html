@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Silver — Where the Sources Converge — Data Lake Simulation — Medallion, Ontology &amp; Convergence</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --bronze:#c2703d; --silver:#6b7280; --gold:#ca8a04;
+  --csv:#0284c7; --xml:#7c3aed; --accent:#0f766e; --line:#e2e8f0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);
+  background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+  display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;
+}
+.deck{
+  width:min(1100px,96vw);background:var(--panel);border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden;display:flex;flex-direction:column;
+  min-height:min(680px,92vh);
+}
+.progress{height:6px;background:var(--line)}
+.progress > span{display:block;height:100%;background:linear-gradient(90deg,var(--csv),var(--accent));}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 30px 0;
+  color:var(--muted);font-size:13px;font-weight:600}
+.topbar .deck-title{letter-spacing:.02em}
+.content{flex:1;display:flex;gap:28px;padding:14px 40px 24px;align-items:center}
+.content.solo{justify-content:center}
+.text{flex:1;min-width:0}
+.diagram{flex:1.1;min-width:0;display:flex;align-items:center;justify-content:center}
+.diagram svg{width:100%;height:auto;max-height:60vh}
+.kicker{display:inline-block;text-transform:uppercase;letter-spacing:.12em;font-size:12px;
+  font-weight:700;color:var(--accent);background:#ecfdf5;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+h1{font-size:34px;line-height:1.15;margin:0 0 14px;color:var(--ink)}
+.text p{font-size:17px;line-height:1.5;margin:0 0 12px}
+.text .lead{font-size:19px}
+.text ul{margin:0 0 12px;padding-left:22px}
+.text li{font-size:16.5px;line-height:1.5;margin:6px 0}
+code{background:#f1f5f9;border:1px solid var(--line);border-radius:6px;padding:1px 6px;
+  font-family:Consolas,"Courier New",monospace;font-size:.92em;color:#0f172a}
+.run code{background:#0f172a;color:#e2e8f0;border-color:#0f172a;padding:6px 12px;display:inline-block}
+.callout{background:#fffbeb;border-left:4px solid var(--gold);padding:10px 14px;border-radius:8px;
+  font-size:15.5px;color:#713f12}
+table.mini{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:15px}
+table.mini th,table.mini td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+table.mini th{background:#f8fafc;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700;color:#fff}
+.pill.bronze{background:var(--bronze)} .pill.silver{background:var(--silver)}
+.pill.gold{background:var(--gold)} .pill.csv{background:var(--csv)} .pill.xml{background:var(--xml)}
+.note{background:#f0f9ff;border-top:1px solid var(--line);color:#0c4a6e;font-size:14px;
+  padding:10px 40px;font-style:italic}
+.note strong{font-style:normal}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 30px;
+  border-top:1px solid var(--line);background:#f8fafc}
+.nav a,.nav span.disabled{
+  text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:9px;
+  color:#fff;background:#0f766e;transition:opacity .15s}
+.nav a:hover{opacity:.85}
+.nav .home{background:#334155}
+.nav span.disabled{background:#cbd5e1;color:#f8fafc;cursor:not-allowed}
+.counter{color:var(--muted);font-weight:700;font-size:14px}
+.footer{display:flex;justify-content:center;align-items:center;gap:8px;
+  padding:9px 30px;background:#0f172a;color:#cbd5e1;font-size:12.5px;letter-spacing:.03em}
+.footer strong{color:#fff;font-weight:600}
+@media (max-width:820px){
+  .content{flex-direction:column;padding:12px 22px 18px}
+  h1{font-size:26px}.diagram svg{max-height:38vh}
+}
+</style>
+</head>
+<body>
+  <div class="deck">
+    <div class="progress"><span style="width:47%"></span></div>
+    <div class="topbar">
+      <span class="deck-title">Data Lake Simulation — Medallion, Ontology &amp; Convergence</span>
+      <span class="counter">Slide 7 / 15</span>
+    </div>
+    <div class="content">
+      
+        <div class="text">
+          <span class="kicker">Layer 2</span>
+          <h1>Silver — Where the Sources Converge</h1>
+          
+<p>Silver reads <strong>both</strong> bronze sources and maps them into one
+conformed <code>sales</code> schema (schema-on-read):</p>
+<ul>
+  <li>CSV rows mapped field-by-field.</li>
+  <li>XML <em>shredded</em> into one record per line item.</li>
+  <li>Then <strong>identical</strong> cleaning, dedupe (by
+      <code>source_system</code> + <code>source_id</code>), and validation.</li>
+</ul>
+<p>Integration happens <strong>here</strong> — not in landing, not in bronze.
+This is <em>late integration</em>: keep sources native until meaning is applied.</p>
+
+        </div>
+      <div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="340" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Silver as an Ontology in Disguise</text>
+
+  <!-- Sources subgraph -->
+  <rect x="40" y="70" width="300" height="210" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+  <text x="60" y="92" font-size="12" font-weight="600" fill="#64748b">Two schemas, two formats</text>
+
+  <rect x="70" y="108" width="240" height="62" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="190" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#0c4a6e">orders.csv</text>
+  <text x="190" y="152" text-anchor="middle" font-size="11.5" fill="#0c4a6e">order_id, order_date, unit_price</text>
+
+  <rect x="70" y="192" width="240" height="62" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="190" y="216" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">invoice.xml</text>
+  <text x="190" y="236" text-anchor="middle" font-size="11.5" fill="#4c1d95">Invoice/@id, @issued, Amount</text>
+
+  <!-- Ontology concept (circle) -->
+  <circle cx="530" cy="175" r="66" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="530" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Ontology</text>
+  <text x="530" y="190" text-anchor="middle" font-size="12" fill="#713f12">concept: SALE</text>
+
+  <!-- Silver -->
+  <rect x="680" y="140" width="190" height="70" rx="8" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="775" y="166" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">silver.sales</text>
+  <text x="775" y="186" text-anchor="middle" font-size="11" fill="#374151">source_system, txn_date,</text>
+  <text x="775" y="200" text-anchor="middle" font-size="11" fill="#374151">revenue</text>
+
+  <!-- Arrows -->
+  <g stroke="#475569" stroke-width="1.8" fill="none">
+    <line x1="310" y1="139" x2="470" y2="160" marker-end="url(#arrow)"/>
+    <line x1="310" y1="223" x2="470" y2="190" marker-end="url(#arrow)"/>
+    <line x1="596" y1="175" x2="678" y2="175" marker-end="url(#arrow)"/>
+  </g>
+  <g font-size="11" fill="#64748b">
+    <text x="360" y="140">maps to</text>
+    <text x="360" y="222">maps to</text>
+  </g>
+</svg>
+</div>
+    </div>
+    <div class="note"><strong>Takeaway:</strong> One shared vocabulary; two source adapters feed it.</div>
+    <div class="nav">
+      <a class="prev" href="slide-06.html">&larr; Prev</a>
+      <a class="home" href="index.html">Contents</a>
+      <span class="counter">7 / 15</span>
+      <a class="next" href="slide-08.html">Next &rarr;</a>
+    </div>
+    <div class="footer">Contact: <strong>George Gergues</strong></div>
+  </div>
+  
+<script>
+(function(){
+  var prev="slide-06.html", next="slide-08.html", home="index.html";
+  function go(u){ if(u) window.location.href=u; }
+  document.addEventListener("keydown",function(e){
+    switch(e.key){
+      case "ArrowRight": case " ": case "PageDown": go(next); break;
+      case "ArrowLeft": case "PageUp": go(prev); break;
+      case "Home": go(home); break;
+      case "o": case "O": go(home); break;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

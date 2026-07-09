@@ -7,7 +7,7 @@ data/
 
 # --- Generated presentation deck (rebuilt via `python slides_maker.py`) ---
 # Comment the next line out if you want to commit the built slides.
-slides/
+#slides/
 
 # ---------------------------------------------------------------------------
 # Python
