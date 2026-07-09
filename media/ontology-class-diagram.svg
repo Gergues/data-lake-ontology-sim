@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="tri" markerWidth="14" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+    </marker>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Sales Domain Ontology — Class Hierarchy</text>
+
+  <!-- Relationship lines first -->
+  <g fill="none" stroke="#475569" stroke-width="1.6">
+    <!-- subclass (hollow triangle) -->
+    <line x1="200" y1="180" x2="200" y2="126" marker-end="url(#tri)"/>       <!-- Customer -> Party -->
+    <line x1="450" y1="260" x2="450" y2="126" marker-end="url(#tri)"/>       <!-- Order -> Sale -->
+    <line x1="600" y1="260" x2="480" y2="126" marker-end="url(#tri)"/>       <!-- Invoice -> Sale -->
+    <!-- associations (open arrow) -->
+    <line x1="450" y1="126" x2="250" y2="200" marker-end="url(#arrow)"/>     <!-- Sale placedBy Customer -->
+    <line x1="450" y1="340" x2="450" y2="392" marker-end="url(#arrow)"/>     <!-- Sale hasLineItem -->
+    <line x1="380" y1="420" x2="250" y2="420" marker-end="url(#arrow)"/>     <!-- LineItem refersToProduct -->
+    <line x1="180" y1="392" x2="180" y2="300" marker-end="url(#arrow)"/>     <!-- Product belongsToCategory -->
+  </g>
+  <g font-size="11" fill="#475569" font-style="italic">
+    <text x="150" y="160">is-a</text>
+    <text x="415" y="200">is-a</text>
+    <text x="545" y="200">is-a</text>
+    <text x="300" y="150">placedBy</text>
+    <text x="458" y="372">hasLineItem</text>
+    <text x="270" y="412">refersToProduct</text>
+    <text x="188" y="350">belongsToCategory</text>
+  </g>
+  <g font-size="10.5" fill="#0f766e" font-weight="700">
+    <text x="430" y="360">1</text><text x="430" y="392">1..*</text>
+    <text x="435" y="150">*</text><text x="258" y="196">1</text>
+  </g>
+
+  <!-- Class boxes -->
+  <g>
+    <rect x="120" y="80" width="160" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="200" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Party</text>
+
+    <rect x="380" y="80" width="160" height="44" rx="6" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+    <text x="460" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="#713f12">Sale</text>
+
+    <rect x="120" y="200" width="160" height="44" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="200" y="227" text-anchor="middle" font-size="14" font-weight="700" fill="#0c4a6e">Customer</text>
+
+    <rect x="370" y="262" width="150" height="44" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="445" y="289" text-anchor="middle" font-size="14" font-weight="700" fill="#0c4a6e">Order</text>
+
+    <rect x="540" y="262" width="150" height="44" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="615" y="289" text-anchor="middle" font-size="14" font-weight="700" fill="#4c1d95">Invoice</text>
+
+    <rect x="370" y="392" width="160" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="450" y="419" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">LineItem</text>
+
+    <rect x="100" y="392" width="150" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="175" y="419" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Product</text>
+
+    <rect x="100" y="256" width="150" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="175" y="283" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">Category</text>
+  </g>
+
+  <!-- Legend -->
+  <g font-size="11" fill="#475569">
+    <line x1="620" y1="400" x2="660" y2="400" stroke="#475569" stroke-width="1.6" marker-end="url(#tri)"/>
+    <text x="668" y="404">subclass (is-a)</text>
+    <line x1="620" y1="428" x2="660" y2="428" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <text x="668" y="432">relationship</text>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 320" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1180" height="320" fill="#ffffff"/>
+  <text x="590" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Medallion Data Flow — Two Sources Converging</text>
+
+  <!-- Sources -->
+  <g>
+    <rect x="20" y="80" width="150" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="95" y="104" text-anchor="middle" font-size="13" font-weight="600" fill="#0c4a6e">Orders system</text>
+    <text x="95" y="122" text-anchor="middle" font-size="12" fill="#0c4a6e">CSV</text>
+
+    <rect x="20" y="196" width="150" height="56" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="95" y="220" text-anchor="middle" font-size="13" font-weight="600" fill="#4c1d95">Invoicing system</text>
+    <text x="95" y="238" text-anchor="middle" font-size="12" fill="#4c1d95">SOAP / XML</text>
+  </g>
+
+  <!-- Landing -->
+  <g>
+    <rect x="230" y="80" width="150" height="56" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="305" y="104" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Landing</text>
+    <text x="305" y="122" text-anchor="middle" font-size="12" fill="#334155">raw CSV</text>
+
+    <rect x="230" y="196" width="150" height="56" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="305" y="220" text-anchor="middle" font-size="13" font-weight="600" fill="#334155">Landing</text>
+    <text x="305" y="238" text-anchor="middle" font-size="12" fill="#334155">raw XML</text>
+  </g>
+
+  <!-- Bronze -->
+  <g>
+    <rect x="440" y="80" width="150" height="56" rx="8" fill="#fde9d9" stroke="#c2703d" stroke-width="1.5"/>
+    <text x="515" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3f19">Bronze</text>
+    <text x="515" y="122" text-anchor="middle" font-size="12" fill="#7c3f19">CSV stored as-is</text>
+
+    <rect x="440" y="196" width="150" height="56" rx="8" fill="#fde9d9" stroke="#c2703d" stroke-width="1.5"/>
+    <text x="515" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3f19">Bronze</text>
+    <text x="515" y="238" text-anchor="middle" font-size="12" fill="#7c3f19">XML stored as-is</text>
+  </g>
+
+  <!-- Silver -->
+  <rect x="650" y="138" width="150" height="56" rx="8" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="725" y="162" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">Silver</text>
+  <text x="725" y="180" text-anchor="middle" font-size="12" fill="#374151">one conformed schema</text>
+
+  <!-- Gold -->
+  <rect x="860" y="138" width="150" height="56" rx="8" fill="#fdf3c7" stroke="#d4af37" stroke-width="1.5"/>
+  <text x="935" y="162" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6d1a">Gold</text>
+  <text x="935" y="180" text-anchor="middle" font-size="12" fill="#8a6d1a">business aggregates</text>
+
+  <!-- Reports -->
+  <rect x="1050" y="138" width="110" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="1105" y="162" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">Reports</text>
+  <text x="1105" y="180" text-anchor="middle" font-size="12" fill="#14532d">BI / ML</text>
+
+  <!-- Arrows -->
+  <g stroke="#475569" stroke-width="1.8" fill="none">
+    <line x1="170" y1="108" x2="228" y2="108" marker-end="url(#arrow)"/>
+    <line x1="170" y1="224" x2="228" y2="224" marker-end="url(#arrow)"/>
+    <line x1="380" y1="108" x2="438" y2="108" marker-end="url(#arrow)"/>
+    <line x1="380" y1="224" x2="438" y2="224" marker-end="url(#arrow)"/>
+    <line x1="590" y1="108" x2="648" y2="158" marker-end="url(#arrow)"/>
+    <line x1="590" y1="224" x2="648" y2="174" marker-end="url(#arrow)"/>
+    <line x1="800" y1="166" x2="858" y2="166" marker-end="url(#arrow)"/>
+    <line x1="1010" y1="166" x2="1048" y2="166" marker-end="url(#arrow)"/>
+  </g>
+</svg>

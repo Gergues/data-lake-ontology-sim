@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 480" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowdash" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="940" height="480" fill="#ffffff"/>
+  <text x="470" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Ontology as the Meaning Layer in the Medallion</text>
+
+  <!-- Bronze subgraph -->
+  <rect x="40" y="70" width="220" height="180" rx="10" fill="#fdf1e7" stroke="#c2703d" stroke-dasharray="4 3"/>
+  <text x="60" y="92" font-size="12" font-weight="700" fill="#7c3f19">Bronze — bytes preserved</text>
+  <rect x="70" y="108" width="160" height="48" rx="8" fill="#fde9d9" stroke="#c2703d"/>
+  <text x="150" y="137" text-anchor="middle" font-size="13" font-weight="600" fill="#7c3f19">orders (CSV)</text>
+  <rect x="70" y="180" width="160" height="48" rx="8" fill="#fde9d9" stroke="#c2703d"/>
+  <text x="150" y="209" text-anchor="middle" font-size="13" font-weight="600" fill="#7c3f19">invoices (XML)</text>
+
+  <!-- Meaning subgraph -->
+  <rect x="330" y="110" width="240" height="140" rx="10" fill="#fefce8" stroke="#ca8a04" stroke-dasharray="4 3"/>
+  <text x="350" y="132" font-size="12" font-weight="700" fill="#713f12">Ontology — shared vocabulary</text>
+  <circle cx="450" cy="185" r="56" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+  <text x="450" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">concept: Sale</text>
+  <text x="450" y="199" text-anchor="middle" font-size="10.5" fill="#713f12">placedBy • hasLineItem</text>
+
+  <!-- Silver subgraph -->
+  <rect x="630" y="70" width="270" height="230" rx="10" fill="#eef1f5" stroke="#6b7280" stroke-dasharray="4 3"/>
+  <text x="650" y="92" font-size="12" font-weight="700" fill="#374151">Silver — conformed to the ontology</text>
+  <rect x="660" y="108" width="210" height="60" rx="8" fill="#e5e7eb" stroke="#6b7280"/>
+  <text x="765" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">sales</text>
+  <text x="765" y="151" text-anchor="middle" font-size="10.5" fill="#374151">source_system, txn_date, revenue</text>
+  <rect x="660" y="196" width="210" height="60" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="765" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">_quarantine</text>
+  <text x="765" y="239" text-anchor="middle" font-size="10.5" fill="#991b1b">fails an axiom</text>
+
+  <!-- Gold -->
+  <rect x="660" y="360" width="210" height="60" rx="8" fill="#fdf3c7" stroke="#d4af37" stroke-width="1.5"/>
+  <text x="765" y="384" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6d1a">Gold</text>
+  <text x="765" y="403" text-anchor="middle" font-size="10.5" fill="#8a6d1a">reports over concepts, not sources</text>
+
+  <!-- Arrows -->
+  <g stroke="#475569" stroke-width="1.8" fill="none">
+    <line x1="230" y1="132" x2="392" y2="170" marker-end="url(#arrow)"/>
+    <line x1="230" y1="204" x2="392" y2="200" marker-end="url(#arrow)"/>
+    <line x1="506" y1="175" x2="658" y2="140" marker-end="url(#arrow)"/>
+    <line x1="765" y1="168" x2="765" y2="358" marker-end="url(#arrow)"/>
+  </g>
+  <line x1="506" y1="200" x2="658" y2="224" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="6 4" fill="none" marker-end="url(#arrowdash)"/>
+
+  <g font-size="11" fill="#64748b">
+    <text x="300" y="140">map</text>
+    <text x="300" y="212">map</text>
+    <text x="540" y="208" fill="#991b1b">axiom violated</text>
+  </g>
+</svg>

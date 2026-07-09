@@ -1,0 +1,4 @@
+# No third-party dependencies.
+#
+# This project runs on the Python standard library only (Python 3.9+).
+# Nothing to install — just run:  python run.py --stage all --reset

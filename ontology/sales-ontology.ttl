@@ -1,0 +1,132 @@
+#  ---------------------------------------------------------------------------
+#  sales-ontology.ttl   (PSEUDO / DEMO ONLY — not loaded by the pipeline)
+#  ---------------------------------------------------------------------------
+#  A small OWL ontology (in Turtle syntax) for the sales domain the class built.
+#  Purpose: show the "real" formal artifact behind the plain-language
+#  concept-dictionary.md. Namespaces are illustrative; nothing here is executed.
+#
+#  How to read it:
+#    :Class        a owl:Class                -> a concept (a noun)
+#    rdfs:subClassOf                          -> "is-a" (Order is a Sale)
+#    owl:ObjectProperty                       -> a relationship between concepts
+#    owl:DatatypeProperty                     -> an attribute holding a literal
+#    owl:Restriction ... owl:cardinality      -> an axiom / rule
+#  ---------------------------------------------------------------------------
+
+@prefix :     <urn:demo:sales#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:demo:sales> a owl:Ontology ;
+    rdfs:label "Sales domain ontology (teaching demo)" ;
+    rdfs:comment "Concepts shared by the CSV orders system and the SOAP/XML invoicing system." .
+
+# ===========================================================================
+# Classes (concepts / nouns)
+# ===========================================================================
+
+:Party    a owl:Class ; rdfs:label "Party" ;
+    rdfs:comment "Any entity that can take part in a transaction." .
+
+:Customer a owl:Class ; rdfs:label "Customer" ;
+    rdfs:subClassOf :Party ;
+    rdfs:comment "A Party that buys goods." .
+
+:Product  a owl:Class ; rdfs:label "Product" .
+:Category a owl:Class ; rdfs:label "Category" .
+:LineItem a owl:Class ; rdfs:label "LineItem" ;
+    rdfs:comment "One product/quantity/price line within a Sale." .
+
+:Sale a owl:Class ; rdfs:label "Sale" ;
+    rdfs:comment "An economic event: goods exchanged for money on a date." .
+
+# *** The key axioms: both source records ARE Sales. ***
+:Order   a owl:Class ; rdfs:label "Order" ;
+    rdfs:subClassOf :Sale ;
+    rdfs:comment "A Sale captured by the e-commerce (CSV) system." .
+
+:Invoice a owl:Class ; rdfs:label "Invoice" ;
+    rdfs:subClassOf :Sale ;
+    rdfs:comment "A Sale captured by the invoicing (SOAP/XML) system." .
+
+# ===========================================================================
+# Object properties (relationships / verbs)
+# ===========================================================================
+
+:placedBy a owl:ObjectProperty ; rdfs:label "placedBy" ;
+    rdfs:domain :Sale ; rdfs:range :Customer .
+
+:hasLineItem a owl:ObjectProperty ; rdfs:label "hasLineItem" ;
+    rdfs:domain :Sale ; rdfs:range :LineItem .
+
+:refersToProduct a owl:ObjectProperty ; rdfs:label "refersToProduct" ;
+    rdfs:domain :LineItem ; rdfs:range :Product .
+
+:belongsToCategory a owl:ObjectProperty ; rdfs:label "belongsToCategory" ;
+    rdfs:domain :Product ; rdfs:range :Category .
+
+# ===========================================================================
+# Datatype properties (attributes holding literals)
+# ===========================================================================
+
+:sourceSystem a owl:DatatypeProperty ; rdfs:domain :Sale ; rdfs:range xsd:string ;
+    rdfs:comment "Provenance tag: 'orders' or 'invoicing'." .
+:sourceId  a owl:DatatypeProperty ; rdfs:domain :Sale ; rdfs:range xsd:string .
+:occurredOn a owl:DatatypeProperty ; rdfs:domain :Sale ; rdfs:range xsd:date .
+:revenue   a owl:DatatypeProperty ; rdfs:domain :Sale ; rdfs:range xsd:decimal ;
+    rdfs:comment "Derived: quantity * unitPrice. Not stored by either source." .
+
+:customerId   a owl:DatatypeProperty ; rdfs:domain :Customer ; rdfs:range xsd:string .
+:customerName a owl:DatatypeProperty ; rdfs:domain :Customer ; rdfs:range xsd:string .
+:productName  a owl:DatatypeProperty ; rdfs:domain :Product ;  rdfs:range xsd:string .
+:categoryName a owl:DatatypeProperty ; rdfs:domain :Category ; rdfs:range xsd:string .
+:quantity  a owl:DatatypeProperty ; rdfs:domain :LineItem ; rdfs:range xsd:integer .
+:unitPrice a owl:DatatypeProperty ; rdfs:domain :LineItem ; rdfs:range xsd:decimal .
+
+# ===========================================================================
+# Axioms / restrictions  (these ARE the silver validation rules)
+# ===========================================================================
+
+# Every Sale has exactly one Customer.
+:Sale rdfs:subClassOf [
+    a owl:Restriction ; owl:onProperty :placedBy ; owl:cardinality 1
+] .
+
+# Every Sale has at least one LineItem.
+:Sale rdfs:subClassOf [
+    a owl:Restriction ; owl:onProperty :hasLineItem ; owl:minCardinality 1
+] .
+
+# Every Sale is identified by exactly one sourceId (natural key within its source).
+:Sale rdfs:subClassOf [
+    a owl:Restriction ; owl:onProperty :sourceId ; owl:cardinality 1
+] .
+
+# NOTE (not expressible in plain OWL cardinality, shown as comments):
+#   * quantity  MUST be a positive integer      -> else quarantine
+#   * unitPrice MUST be a non-negative decimal   -> else quarantine
+#   * occurredOn MUST parse to xsd:date          -> else quarantine
+#   These value constraints live in src/silver.py; a SHACL shape or OWL2 datatype
+#   restriction would formalize them in a production ontology.
+
+# ===========================================================================
+# Example individuals (one Sale from EACH source, same concept)
+# ===========================================================================
+
+:sale_orders_ORD-1042 a :Order ;
+    :sourceSystem "orders" ; :sourceId "ORD-1042" ;
+    :occurredOn "2026-06-01"^^xsd:date ;
+    :placedBy :cust_C007 ;
+    :revenue 39.98 .
+
+:sale_invoicing_INV-5001-1 a :Invoice ;
+    :sourceSystem "invoicing" ; :sourceId "INV-5001#1" ;
+    :occurredOn "2026-06-01"^^xsd:date ;
+    :placedBy :cust_C007 ;
+    :revenue 39.98 .
+
+# Both individuals are :Sale (via subclass), both :placedBy the SAME customer —
+# one real-world Customer identity across two systems and two formats.
+:cust_C007 a :Customer ; :customerId "C007" ; :customerName "Ada Lovelace" .

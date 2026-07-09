@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowd" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#0f766e"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+  <text x="480" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">Lakehouse and Ontology Store — Two Sources of Truth</text>
+
+  <!-- Source systems -->
+  <rect x="360" y="66" width="240" height="86" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+  <text x="480" y="86" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">Source systems</text>
+  <rect x="378" y="98" width="96" height="42" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="426" y="124" text-anchor="middle" font-size="12" font-weight="600" fill="#0c4a6e">Orders (CSV)</text>
+  <rect x="486" y="98" width="100" height="42" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="536" y="117" text-anchor="middle" font-size="11.5" font-weight="600" fill="#4c1d95">Invoicing</text>
+  <text x="536" y="132" text-anchor="middle" font-size="10.5" fill="#4c1d95">(SOAP/XML)</text>
+
+  <!-- LAKEHOUSE column (left) -->
+  <rect x="40" y="220" width="400" height="300" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="240" y="246" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">LAKEHOUSE</text>
+  <text x="240" y="266" text-anchor="middle" font-size="11.5" font-style="italic" fill="#0369a1">integrates at the DATA / INSTANCE level</text>
+  <text x="240" y="288" text-anchor="middle" font-size="12" fill="#334155">"What happened?"  ·  scales on VOLUME</text>
+
+  <rect x="90" y="312" width="300" height="46" rx="8" fill="#fde9d9" stroke="#c2703d"/>
+  <text x="240" y="340" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3f19">Bronze — raw, per source</text>
+  <rect x="90" y="376" width="300" height="46" rx="8" fill="#e5e7eb" stroke="#6b7280"/>
+  <text x="240" y="404" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">Silver — conformed</text>
+  <rect x="90" y="440" width="300" height="46" rx="8" fill="#fdf3c7" stroke="#d4af37"/>
+  <text x="240" y="468" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6d1a">Gold — aggregates</text>
+  <g stroke="#475569" stroke-width="1.7" fill="none">
+    <line x1="240" y1="358" x2="240" y2="374" marker-end="url(#arrow)"/>
+    <line x1="240" y1="422" x2="240" y2="438" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ONTOLOGY column (right) -->
+  <rect x="520" y="220" width="400" height="300" rx="12" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="720" y="246" text-anchor="middle" font-size="15" font-weight="700" fill="#713f12">ONTOLOGY STORE</text>
+  <text x="720" y="266" text-anchor="middle" font-size="11.5" font-style="italic" fill="#a16207">integrates at the SCHEMA / CONCEPT level</text>
+  <text x="720" y="288" text-anchor="middle" font-size="12" fill="#334155">"What does it mean?"  ·  scales on COMPLEXITY</text>
+
+  <rect x="570" y="312" width="300" height="46" rx="8" fill="#fff7d6" stroke="#ca8a04"/>
+  <text x="720" y="335" text-anchor="middle" font-size="12.5" font-weight="700" fill="#713f12">Mappings</text>
+  <text x="720" y="351" text-anchor="middle" font-size="10.5" fill="#713f12">source field → concept</text>
+  <rect x="570" y="376" width="300" height="110" rx="8" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="720" y="404" text-anchor="middle" font-size="12.5" font-weight="700" fill="#713f12">Concepts · Relationships · Axioms</text>
+  <text x="720" y="428" text-anchor="middle" font-size="11" fill="#713f12">Order ⊑ Sale   Invoice ⊑ Sale</text>
+  <text x="720" y="448" text-anchor="middle" font-size="11" fill="#713f12">placedBy · hasLineItem</text>
+  <text x="720" y="468" text-anchor="middle" font-size="11" fill="#713f12">identity · inference</text>
+  <line x1="720" y1="358" x2="720" y2="374" stroke="#475569" stroke-width="1.7" marker-end="url(#arrow)"/>
+
+  <!-- Source -> Lakehouse (solid = data) -->
+  <g stroke="#475569" stroke-width="1.9" fill="none">
+    <line x1="420" y1="150" x2="250" y2="310" marker-end="url(#arrow)"/>
+    <line x1="500" y1="152" x2="270" y2="310" marker-end="url(#arrow)"/>
+  </g>
+  <text x="250" y="228" font-size="10.5" fill="#475569">actual rows &amp; documents</text>
+
+  <!-- Source -> Ontology (dotted = meaning) -->
+  <g stroke="#0f766e" stroke-width="1.8" stroke-dasharray="6 4" fill="none">
+    <line x1="470" y1="150" x2="690" y2="310" marker-end="url(#arrowd)"/>
+    <line x1="548" y1="152" x2="712" y2="310" marker-end="url(#arrowd)"/>
+  </g>
+  <text x="600" y="228" font-size="10.5" fill="#0f766e">what fields MEAN</text>
+
+  <!-- Ontology governs Silver -->
+  <line x1="568" y1="430" x2="392" y2="400" stroke="#0f766e" stroke-width="1.8" stroke-dasharray="6 4" fill="none" marker-end="url(#arrowd)"/>
+  <text x="430" y="428" font-size="10.5" fill="#0f766e">governs / validates</text>
+
+  <!-- Legend -->
+  <g font-size="11" fill="#475569">
+    <line x1="360" y1="536" x2="400" y2="536" stroke="#475569" stroke-width="1.9" marker-end="url(#arrow)"/>
+    <text x="406" y="540">data moves</text>
+    <line x1="520" y1="536" x2="560" y2="536" stroke="#0f766e" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#arrowd)"/>
+    <text x="566" y="540" fill="#0f766e">meaning is declared</text>
+  </g>
+</svg>
